@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Merry-Axe-Mas</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="./src/css/style.css" />
+  <script src="../src/js/libs/phaser.js"></script>
+  <script src="../src/js/libs/jquery-3.4.1.min.js"></script>
+  <script src="../src/js/libs/phaser-ui-tools.js"></script>
+  <script src="../src/js/orientationChecker.js"></script>
+  <script src="../src/js/libs/CanvasInput.min.js"></script>
+  <script src="../src/js/libs/CanvasInput.js"></script>
+
+  <script src="./src/js/objects/santa1.js"></script>
+  <script src="./src/js/objects/sackhead.js"></script>
+  <script src="./src/js/objects/chimney.js"></script>
+  <script src="./src/js/objects/santa2.js"></script>
+  <script src="./src/js/objects/caroler.js"></script>
+  <script src="./src/js/objects/loop.js"></script>
+  <script src="./src/js/objects/child.js"></script>
+  <script src="./src/js/objects/verticalMoveObject.js"></script>
+
+  <script src="./src/js/scenes/boot.js"></script>
+  <script src="./src/js/scenes/levelOneLoading.js"></script>
+  <script src="./src/js/scenes/level1.js"></script>
+  <script src="./src/js/scenes/levelTwoLoading.js"></script>
+  <script src="./src/js/scenes/level3.js"></script>
+  <script src="./src/js/scenes/levelThreeLoading.js"></script>
+  <script src="./src/js/scenes/level2.js"></script>
+  <script src="./src/js/scenes/fail.js"></script>
+  <script src="./src/js/scenes/complete.js"></script>
+  <script src="./src/js/scenes/congratuation.js"></script>
+  <script src="./src/js/main.js"></script>
+
+  <style media="screen" type="text/css">
+    @font-face {
+      font-family: UI-Font;
+      src: url("../src/fonts/PressStart2P.ttf");
+      font-weight: 400;
+      font-weight: normal;
+    }
+
+    .fontLoader {
+      position: absolute;
+      left: -1000px;
+      visibility: hidden;
+    }
+  </style>
+</head>
+
+<body>
+
+  <a style="    position: absolute;
+  width: 0%;
+  height: 10%;
+  top: 0%;
+  background: transparent;" id="clicker" href=""
+    onclick="window.open(this.href,'_blank','height=500,width=500,status=no, toolbar=no,menubar=no,location=no');return false">
+    </a>
+
+  <div class="fontLoader" style="font-family: UI-Font;">-</div>
+
+</body>
+
+</html>

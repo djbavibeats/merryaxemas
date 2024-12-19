@@ -1,0 +1,1058 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" content="width=device-width,minimum-scale=1,maximum-scale=1" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <title></title>
+    <meta property="fb:app_id" content="263249457569822">
+    <meta property="og:url" content="./index.html">
+    <meta property="og:title" content="">
+    <meta name="author" content="">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="video.other">
+    <meta property="og:image" content="">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <link rel="icon" type="image/png" href="">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <style>
+        @font-face {
+            font-family: "fontbold";
+            src: url("./fonts/MaerskHeadline-Bold.otf");
+        }
+
+        @font-face {
+            font-family: "fontlight";
+            src: url("./fonts/MaerskHeadline-Light.otf");
+        }
+
+        @font-face {
+            font-family: "fontregular";
+            src: url("./fonts/MaerskHeadline-Regular.otf");
+        }
+
+        @font-face {
+            font-family: "digi";
+            src: url("./fonts/DS-DIGIB.TTF");
+        }
+
+        body {
+            background: transparent;
+            padding: 0px;
+            margin: 0px;
+            font-family: "fontregular";
+            overflow: hidden;
+        }
+
+
+
+        #game {
+            width: 95%;
+            position: fixed;
+            height: 95%;
+            display: none;
+            align-items: flex-end;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            margin-bottom: 0;
+            font-family: "digi";
+        }
+
+        canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+
+
+        #guiContainer {
+            position: fixed;
+            left: 5%;
+            width: 45%;
+            height: 90%;
+            text-align: center;
+            display: none;
+        }
+
+        #title {
+            text-align: center;
+        }
+
+        .btn {
+            width: 200px;
+            display: block;
+            width: 50%;
+            margin-left: 25%;
+            font-size: 125%;
+            background-color: orangered;
+            border: black;
+            padding: 5px;
+            cursor: pointer;
+            outline-color: black;
+            border-radius: 10px;
+        }
+
+        #display {
+            position: fixed;
+            width: 25%;
+            left: 32.5%;
+            font-size: 150%;
+            color: black;
+            background-color: orangered;
+            width: 35%;
+            height: 20%;
+            border-radius: 5%;
+        }
+
+        .nextPiece {
+            width: 90%;
+        }
+
+        #landinglogo {
+            width: 60%;
+            left: 0;
+            right: 0;
+            margin-top: 5%;
+        }
+
+        #countrytxt {
+            width: 60%;
+            left: 0;
+            right: 0;
+            margin-top: 5%;
+        }
+
+        #statistics {
+            position: absolute;
+            left: 10%;
+            width: 80%;
+            text-align: center;
+            font-size: 200%;
+        }
+
+        .select-wrapper {
+            display: inline-block;
+            position: relative;
+            width: 87%;
+            height: 133px;
+        }
+
+        .txtbox2 {
+            background: url(./assets/Field.png);
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin: 0 auto;
+            display: block;
+            outline: none;
+            border: none;
+            width: 100%;
+            height: 100%;
+            text-align: right;
+            color: #000000;
+            font-size: 20px;
+            font-family: GothamHTF;
+        }
+
+        #gameUI {
+            width: 100%;
+            position: fixed;
+            height: 17%;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+        }
+
+        #wrapper {
+            height: 20%;
+            margin-top: 5%;
+            display: flex;
+            text-align: center;
+            font-family: "GothamHTF";
+            font-size: 22px;
+        }
+
+        #c2 {
+            width: 40%;
+            height: 100%;
+        }
+
+        #c1,
+        #c3 {
+            margin-top: 4%;
+            width: 30%;
+            height: 90%;
+        }
+
+        #wrapper2 {
+            height: 15%;
+            margin-top: 5%;
+            display: flex;
+            text-align: center;
+            font-family: "GothamHTF";
+            font-size: 42px;
+        }
+
+        #c5 {
+            width: 33%;
+            height: 90%;
+        }
+
+        #c4 {
+            width: 33%;
+            height: 90%;
+        }
+
+        #c6 {
+            width: 33%;
+            height: 90%;
+        }
+
+        @supports (-webkit-touch-callout: none) {
+            #sel {
+                text-indent: 10%;
+            }
+        }
+
+        @supports not (-webkit-touch-callout: none) {
+            .txtbox2 {
+                text-align-last: center;
+            }
+        }
+
+        #scorepage {
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1001;
+            text-align: center;
+            background-color: transparent;
+            display: none;
+        }
+
+        #formpage {
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1001;
+            text-align: center;
+            background-color: transparent;
+            display: none;
+
+        }
+
+        #lbltxt {
+            font-family: Frutiger;
+            font-size: 20px;
+            color: #ffffff;
+        }
+
+        #errId {
+            font-family: Frutiger;
+            font-size: 90px;
+            color: #ffffff;
+        }
+
+        #logohc {
+            /* display: none; */
+            position: absolute;
+            bottom: 50px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: 40%;
+        }
+
+        #scorepage1 {
+            display: none;
+        }
+
+        #formpage {
+            display: none;
+        }
+
+        .txtbox {
+            background: url(./assets/Field.png);
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin: 0 auto;
+            display: block;
+            outline: none;
+            border: none;
+            width: 100%;
+            height: 70px;
+            text-align: center;
+            color: #000000;
+            font-size: 22px;
+            margin-top: 5%;
+            font-family: GothamHTF;
+        }
+
+        .txtbox3 {
+            background: url(./assets/Field.png);
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin: 0 auto;
+            display: block;
+            outline: none;
+            border: none;
+            width: 100%;
+            height: 70px;
+            text-align: center;
+            color: #000000;
+            font-size: 22px;
+            margin-top: 5%;
+            font-family: GothamHTF;
+        }
+
+        #vid {
+            width: 100%;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            margin-top: 50%;
+        }
+
+        #loader {
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000000000000000000000001;
+            text-align: center;
+            background-color: #414141;
+            display: block;
+            position: fixed;
+        }
+
+        #loaderUI {
+            border: 7px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 7px solid #42b0d5;
+            width: 30px;
+            height: 30px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 40%;
+            margin: auto;
+        }
+
+        /* Safari */
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .dummy {
+            position: absolute;
+            z-index: -1;
+            opacity: 0;
+            left: -100px;
+        }
+
+        .dummy p:nth-child(1) {
+            font-family: 'digi';
+        }
+
+        .dummy p:nth-child(2) {
+            font-family: 'fontbold';
+        }
+
+        .dummy p:nth-child(1) {
+            font-family: 'fontlight';
+        }
+
+        .dummy p:nth-child(2) {
+            font-family: 'fontregular';
+        }
+
+        #imgloader {
+            width: 40%;
+        }
+
+        #lbltxt2 {
+            font-family: Frutiger;
+            font-size: 150px;
+        }
+
+        #game-sec {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+
+        .video-container {
+            position: absolute;
+            display: block;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+        }
+
+        .video-container-landscape>video {
+            position: absolute;
+            width: 100%;
+            max-height: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #playagainbtn2 {
+            width: 50%;
+        }
+
+        #submit2 {
+            width: 50%;
+        }
+
+        #wrapper3 {
+            height: 15%;
+            margin-top: 5%;
+            display: flex;
+            text-align: center;
+            font-family: "GothamHTF";
+            font-size: 25px;
+        }
+
+        #c7 {
+            width: 20%;
+            margin: auto;
+            color: #cad401;
+        }
+
+        #c8 {
+            width: 80%;
+            margin: auto;
+            height: 90%;
+        }
+
+        #topFrameUI {
+            width: 100%;
+            position: fixed;
+            height: 20%;
+            align-items: flex-end;
+            left: 0;
+            right: 0;
+            top: -100%;
+            margin: auto;
+            z-index: 999;
+            touch-action: none;
+            pointer-events: none;
+            display: flex;
+            flex-direction: row;
+            transition: all 1s;
+        }
+
+        #topFrame {
+            width: 100%;
+            position: fixed;
+            height: 100%;
+            background-image: url("./assets/images/frame.png");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: center center;
+            /* display: none; */
+            align-items: flex-end;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            z-index: 1000000000000000000000000;
+            touch-action: none;
+            pointer-events: none;
+        }
+
+        #container {
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            width: 80%;
+            height: 60%;
+            background-image: url(./assets/BG-02.jpg);
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: center center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #title1 {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1001;
+            text-align: center;
+            background-color: transparent;
+            display: none;
+            transition: top 1s;
+            top: 200%;
+        }
+
+        #titleScreen {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            width: 100%;
+            height: 100%;
+            transition: top 1s;
+            top: 200%;
+        }
+
+        #scorepageScreen {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            width: 100%;
+            height: 100%;
+            transition: top 1s;
+            top: 200%;
+        }
+
+        #formScreen {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            width: 100%;
+            height: 100%;
+            transition: top 1s;
+            top: 200%;
+        }
+
+        #shareScreen {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            width: 100%;
+            height: 100%;
+            transition: top 1s;
+            top: 200%;
+        }
+
+        #howtoplayScreen {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            width: 100%;
+            height: 100%;
+            transition: top 1s;
+            top: 200%;
+        }
+
+        .boxImg {
+            width: 80%;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            position: absolute;
+        }
+
+        #bgFrame {
+            background-image: url(./assets/GameBG.jpg);
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: center center;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+        }
+
+        .pagefold {
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        #hollowbox {
+            width: 100%;
+            top: -100%;
+            margin: auto;
+            position: absolute;
+            transition: top 1s;
+        }
+
+        #boxTime {
+            width: 30%;
+            height: 30%;
+            left: 0;
+            margin: auto;
+            top: 0;
+            margin-left: 8px;
+            margin-top: 8px;
+            transition: all 1s;
+        }
+
+        #boxScore {
+            width: 30%;
+            height: 30%;
+            right: 0;
+            margin: auto;
+            top: 0;
+            margin-right: 8px;
+            margin-top: 8px;
+            transition: all 1s;
+        }
+
+        #cardboardBox {
+            background-image: url(./assets/images/card-board-bg--instruction.jpg);
+            background-size: 80% auto;
+            background-repeat: no-repeat;
+            background-position: center center;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #cardboardBox1 {
+            background-image: url(./assets/images/card-board-bg--form-bg.jpg);
+            /* background-image: url(./assets/images/face.png); */
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            background-position: center center;
+            width: 80%;
+            height: 100%;
+            left: 0;
+            right: 0;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all .5s linear;
+        }
+
+        #cardboardBox2 {
+            background-image: url(./assets/images/card-board-bg--end-screen.jpg);
+            /* background-image: url(./assets/images/face.png); */
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            background-position: center center;
+            width: 80%;
+            height: 100%;
+            left: 0;
+            right: 0;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all .5s linear;
+        }
+
+        #cardboardBox24 {
+            background-image: url(./assets/images/card-board-bg--congrats.jpg);
+            background-size: 80% auto;
+            background-repeat: no-repeat;
+            background-position: center center;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #card {
+            opacity: 1;
+            transition: opacity .4s;
+        }
+
+        #scoredialog {
+            text-align: center;
+        }
+
+        #row {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+
+        #submitbtn {
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            position: absolute;
+        }
+
+        #inputDiv {
+            display: flex;
+            flex-direction: row;
+        }
+
+
+        #divform {
+            margin: 0 auto;
+            align-items: center;
+            display: flex;
+            height: 40px;
+        }
+
+        #inputtag {
+            width: 100%;
+            background-color: rgba(225, 225, 225, .6);
+            border: rgba(225, 225, 225, .6);
+            border-radius: 1px;
+            line-height: 22px;
+        }
+
+        #dropdown {
+            background-color: rgba(225, 225, 225, .6);
+            border: rgba(225, 225, 225, .6);
+            border-radius: 1px;
+            line-height: 22px;
+            color: #6B5441;
+            position: absolute;
+            border: none;
+            /* background: transparent; */
+            outline: none;
+            font-family: DM;
+            opacity: 1;
+            position: relative;
+            height: 60%;
+            width: 90%;
+            left: 7%;
+            border-color: rgba(225, 225, 225, .6);
+            background: transparent;
+            border: 1px solid;
+        }
+
+        #animation {
+            width: 200px;
+            height: 273px;
+            /* left: 107px; */
+            background-image: url("./assets/chitti.png");
+            /* background-image: "url(./envelope.png)" left center; */
+            background-size: cover;
+            /* animation: play 1.5s steps(40); */
+            display: inline-block;
+
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            opacity: 0;
+            transition: opacity 1s;
+            z-index: -1;
+        }
+
+        #animate {
+            width: 200px;
+            height: 273px;
+            background-image: url("./assets/chitti.png");
+            background-size: cover;
+            animation: play 1.5s steps(40);
+            display: inline-block;
+            z-index: 10000000;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            transition: all 1s;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        @keyframes play {
+            100% {
+                background-position: -8000px;
+            }
+
+        }
+
+        #animation p {
+            opacity: 0;
+            transition: opacity 1s;
+            margin-top: 88px;
+            font-family: 'fontbold';
+            font-size: 20px;
+        }
+
+        #animate p {
+            opacity: 0;
+            transition: opacity 1s;
+            margin-top: 88px;
+            font-family: 'fontbold';
+            font-size: 20px;
+        }
+
+        #centerDiv {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #pointsDiv {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #retryId {
+            cursor: pointer;
+            color: #6B5441;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        /* SELECT ------------------------------------------------------------------------------------------------------------------------------- */
+        .vodiapicker {
+            display: none;
+            z-index: 100;
+        }
+
+        #a {
+            padding-left: 0px;
+        }
+
+        #a img,
+        .btn-select img {
+            width: 25px;
+        }
+
+        #a li {
+            list-style: none;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            font-size: 14px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        #a li:hover {
+            background-color: #f4f3f3;
+        }
+
+        #a li img {
+            margin: 5px;
+        }
+
+        /* item list */
+
+        .b {
+            display: none;
+            width: 105%;
+            /* max-width: 350px; */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            border-radius: 5px;
+            background-color: #fff;
+            background-color: rgba(225, 225, 225, .6);
+            border: rgba(225, 225, 225, .6);
+            border-radius: 1px;
+        }
+
+        .open {
+            display: show !important;
+        }
+
+        .btn-select {
+
+            font-family: 'fontregular';
+            /* margin-top: 10px; */
+            width: 100%;
+            /* max-width: 350px; */
+            height: 26px;
+            /* border-radius: 5px; */
+            background-color: #fff;
+            border: 1px solid #ccc;
+            background-color: rgba(225, 225, 225, .6);
+            border: rgba(225, 225, 225, .6);
+            border-radius: 1px;
+        }
+
+        .btn-select li {
+            list-style: none;
+            float: left;
+            padding-bottom: 0px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .btn-select:hover li {
+            margin-left: 0px;
+        }
+
+        .btn-select:hover {
+            background-color: #f4f3f3;
+            border: 1px solid transparent;
+            box-shadow: inset 0 0px 0px 1px #ccc;
+        }
+
+        .btn-select:focus {
+            outline: none;
+        }
+
+
+        #hand1 {
+            width: 70px;
+            height: 258px;
+            background-image: url("./assets/hand1.png");
+            background-size: cover;
+            display: inline-block;
+            position: absolute;
+            z-index: 1000000;
+            top: 35%;
+            left: 18%;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        #popupIDTH {
+            position: absolute;
+            z-index: 1000000000000000000000000000000000000000000000;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 80%;
+            height: 70%;
+            overflow-y: auto;
+            background: white;
+            padding: 5%;
+            border-radius: 16px;
+            top: 200%;
+            transition: top .5s;
+            position: fixed;
+        }
+
+        #close {
+            width: 20px;
+            height: auto;
+            float: right;
+        }
+
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser-ce/2.13.3/phaser.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="dummy">
+        <p>A</p>
+        <p>A</p>
+        <p>A</p>
+        <p>A</p>
+    </div>
+    <label for="" style="opacity: 0;" id="time">60</label>
+    <label for="" style="opacity: 0;" id="score">0</label>
+    <label for="" style="opacity: 0;" id="nextblock">0</label>
+    <label for="" style="opacity: 0;" id="lifenum">3</label>
+    <label for="" style="opacity: 0;" id="gameOver">false</label>
+    <label for="" style="opacity: 0;" id="pauseGame">false</label>
+
+    
+    <audio id="brickcomplete" src="./assets/Brick_Complete.mp3"></audio>
+
+    <div id="game"></div>
+    <script src="paperfold.min.js"></script>
+    <script src="./js/board.js"></script>
+    <script src="./js/piece.js"></script>
+    <script src="./js/index.js"></script>
+    <script>
+        setInterval(() => {
+            if (game.boolPause && document.getElementById("pauseGame").innerHTML === "false") {
+                game.boolPause = false;
+                game.paused = false;
+            }
+            if (document.getElementById("pauseGame").innerHTML === "true") {
+                game.boolPause = true;
+                game.paused = true;
+            }
+        }, 100);
+    </script>
+</body>
+
+</html>

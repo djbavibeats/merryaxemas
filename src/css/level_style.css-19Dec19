@@ -1,0 +1,90 @@
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,500,700&display=swap);
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+body {
+    no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    font-family: Ubuntu, sans-serif;
+    font-weight: 400
+}
+
+.clearfix {
+  clear: both;
+  height: 1px;
+  width: 100%;
+  display: block;
+}
+
+.game_popup {
+    border-radius: 10px;
+    border: 2px solid red;
+    background-color: #000;
+    position: absolute;
+    max-width: 500px;
+    min-width: 375px;
+    top: 40%;
+    left: 50%;
+    margin-left: -250px;
+    font-size: 24px;
+    text-align: center;
+    padding: 25px 20px
+}
+
+.game_popup span {
+    font-size: 30px;
+    color: #ff6263;
+    display: block;
+    font-weight: 700;
+    margin-bottom: 30px
+}
+
+.game_popup .form_cont {
+    display: inline-block;
+    overflow: hidden
+}
+
+.game_popup input[type=email] {
+    font-size: 18px;
+    color: #000;
+    display: block;
+    border: 0;
+    border-radius: 5px;
+    padding: 16px 10px;
+    float: left;
+    margin-right: 20px;
+    margin-top: 30px;
+}
+
+.game_popup .playButton {
+    font-size: 18px;
+    color: #000;
+    display: inline-block;
+    border: 0;
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: 700;
+    font-size: 30px;
+    background: red;
+    background: -moz-linear-gradient(top, red 0, red 0, #fff 44%, #fff 58%, red 100%, red 100%);
+    background: -webkit-linear-gradient(top, red 0, red 0, #fff 44%, #fff 58%, red 100%, red 100%);
+    background: linear-gradient(to bottom, red 0, red 0, #fff 44%, #fff 58%, red 100%, red 100%);
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.game_popup .form_cont .playButton  {
+    float: left;
+}
+
+.game_popup .playButton:hover {
+    background: -moz-linear-gradient(top, #fff 0, #fff 0, red 44%, red 58%, #fff 100%, #fff 100%);
+    background: -webkit-linear-gradient(top, #fff 0, #fff 0, red 44%, red 58%, #fff 100%, #fff 100%);
+    background: linear-gradient(to bottom, #fff 0, #fff 0, red 44%, red 58%, #fff 100%, #fff 100%)
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Ice Nine Kills</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+  <link rel="preload" as="font" href="fonts/kongtext.ttf" type="font/ttf" />
+</head>
+<style type="text/css" crossorigin="anonymous">
+  @font-face {
+    font-family: 'kong';
+    src: url('fonts/kongtext.ttf');
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+  }
+
+  .gameCanvas {
+    display: block;
+    touch-action-delay: none;
+    touch-action: none;
+    -ms-touch-action: none;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+  }
+</style>
+
+<body>
+  <!-- <a href="https://link.iceninekills.com/INKTikTok" target="_blank" id="clicker" rel="noopener noreferrer"></a>
+ -->
+  <!-- <audio id="finishher" src="./finishher.mp3" preload></audio> -->
+  <audio id="finishher" preload>
+    <source src="finishher.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+  </audio>
+
+
+  
+
+  <a style="position: absolute;width: 0%;height: 10%;top: 0%;background: transparent;" id="clicker" href="https://link.iceninekills.com/INKTikTok"onclick="window.open(this.href,'_blank','height=500,width=500,status=no, toolbar=no,menubar=no,location=no');return false">
+  </a>
+
+  <script src="preload.js"></script>
+  <script src="utility.js"></script>
+  <script src="lady.js"></script>
+  <script src="santa.js"></script>
+  <script src="gameover.js"></script>
+  <script src="complete.js"></script>
+  <script src="main.js"></script>
+
+</body>
+
+</html>

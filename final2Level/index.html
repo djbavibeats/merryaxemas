@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Ice Nine Kills</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+
+  <link rel="preload" as="font" href="fonts/kongtext.ttf" type="font/ttf" />
+</head>
+<style type="text/css" crossorigin="anonymous">
+  @font-face {
+    font-family: 'kong';
+    src: url('fonts/kongtext.ttf');
+  }
+
+  @font-face {
+    font-family: 'brokenConsoleBold';
+    src: url('fonts/BrokenConsoleBold.ttf');
+  }
+
+  @font-face {
+    font-family: 'morfelan';
+    src: url('fonts/MORFELAN.otf');
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-image: url('');
+    background-position: center;
+    background-size: 100% auto;
+    font-family: "kong";
+  }
+
+  .gameCanvas {
+    display: block;
+    touch-action-delay: none;
+    touch-action: none;
+    -ms-touch-action: none;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    z-index: 0;
+  }
+
+  #game1 {
+    z-index: 2;
+    touch-action: none;
+    pointer-events: none;
+    position: fixed;
+  }
+
+  #game2 {
+    z-index: 1;
+    width: 35vw;
+    height: 90%;
+    bottom: 7vh;
+    z-index: 1;
+    opacity: 0;
+    transition: all 1s;
+    position: fixed;
+  }
+
+  #game2 canvas {
+    border: 2px solid white;
+  }
+
+  body {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  div {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  #myButton {
+    z-index: 2;
+    width: 150px;
+    height: 50px;
+    font-size: 22px;
+    background-color: bisque;
+    border: none;
+    border-radius: 20px;
+  }
+</style>
+
+<body>
+
+  <audio id="bgMusic" preload>
+    <source src="MerryAxe-Mas.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+  </audio>
+  
+  <audio id="Gameovermusic" preload>
+    <source src="game_over.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+  </audio>
+
+  <audio id="level_completedmp3" preload>
+    <source src="level_completed.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+  </audio>
+
+  <iframe src="" id="game2" class="gameCanvas" frameborder="0"></iframe>
+
+  <div id="game1" class="gameCanvas"></div>
+
+  <a style="position: absolute;width: 0%;height: 10%;top: 0%;background: transparent;" id="clicker"
+    href="https://www.ink-merch.com/pages/axemas"
+    onclick="window.open(this.href,'_blank','height=500,width=500,status=no, toolbar=no,menubar=no,location=no');return false">
+  </a>
+
+  <script src="preload.js"></script>
+  <script src="utility.js"></script>
+  <script src="gameover.js"></script>
+  <script src="complete.js"></script>
+  <script src="paperfold.min.js"></script>
+  <script src="main.js"></script>
+
+  <script>
+    var bool1 = false;
+    window.boolstartgame = false;
+    function checkOrientation() {
+      console.log("checkOrientation");
+      var orientation = (window.innerWidth > window.innerHeight) ? "Landscape" : "Portrait";
+      /* document.getElementById("orientation").textContent =  */
+      console.log("Orientation: " + orientation);
+      if (orientation === "Landscape") {
+        document.getElementById("myButton").style.display = "block";
+      }
+      if (orientation === "Portrait") {
+        document.getElementById("myButton").style.display = "none";
+      }
+    }
+
+    // Check orientation on initial load
+    checkOrientation();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", checkOrientation);
+    window.addEventListener("focus", handleFocus);
+    window.addEventListener("blur", handleBlur);
+
+    function handleFocus(){
+      //questionPopup = false
+      /* isPaused = false; */
+    }
+
+    function handleBlur(){//questionPopup = true
+      /* isPaused = true; */
+    }
+  </script>
+
+  <script>
+
+    var timeVal = 10;
+    var scoreVal = 0;
+    var nextblockVal = 0;
+    var iframe = null;
+    var iframeDocument = null;
+    var iframereadybool = false;
+    function getDivContent() {
+
+
+
+      console.log("getDivContent")
+
+      iframe = document.getElementById('game2');
+
+
+      iframe.onload = function () {
+
+        iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+        console.log("iframeloaded")
+
+        timeVal = iframeDocument.getElementById('time').innerHTML;
+        scoreVal = iframeDocument.getElementById('score').innerHTML;
+        nextblockVal = iframeDocument.getElementById('nextblock').innerHTML;
+
+        console.log(timeVal, scoreVal, " KK");
+        iframereadybool = true;
+      };
+
+      if (iframe.contentWindow.document.readyState === 'complete') {
+        iframe.onload();
+      }
+    }
+
+    function setValues() {
+      /*  console.log("setValues : "); */
+      timeVal = iframeDocument.getElementById('time').innerHTML;
+      scoreVal = iframeDocument.getElementById('score').innerHTML;
+      nextblockVal = iframeDocument.getElementById('nextblock').innerHTML;
+      lifenum = iframeDocument.getElementById('lifenum').innerHTML;
+      gameStateOver = iframeDocument.getElementById("gameOver").innerHTML;
+
+      /* console.log(lifenum, "lifenum>>") */
+    }
+
+
+
+  </script>
+
+</body>
+
+</html>
